@@ -7,11 +7,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { addUser, removeUser } from '../utils/userSlice';
 import { LOGO } from '../utils/constants';
+import { toggleGptSearchView } from '../utils/gptSlice';
+import { SUPPORTED_LANGUAGES } from '../utils/constants';
+import { changeLanguage } from '../utils/configSlice';
+
 
 const Header = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
   const handleSignOut = () => {
     signOut(auth)
     .then(() => {
@@ -46,32 +51,47 @@ const Header = () => {
       //Unsubscribe when the component unmounts
       return () => unsubscribe();
 }, []);
+
+  const handleGptSearchClick = () => {
+    dispatch(toggleGptSearchView());
+  }
+  const handleLanguageChange = (e) => {
+    dispatch(changeLanguage(e.target.value));
+  }
   return (
-    <div className='w-full px-4 py-1 bg-gradient-to-b from-black z-10 flex flex-col md:flex-row justify-between items-center'>
-        <img
-        className='w-24 md:w-32 mx-auto md:mx-0'
+    <div className='absolute w-full px-4 py-2 bg-black z-10 flex flex-col md:flex-row justify-between items-center -top-2'>
+      <img
+        className='w-20 md:w-24 mx-auto md:mx-0'
         src={LOGO}
-        alt='logo'/>
-        <div className='flex flex-col items-center md:flex-row md:space-x-4'>
-          <p className='text-yellow-300 text-sm mb-2 md:mb-0 font-bold italic tracking-wide border-b border-white pb-1 md:pb-0 md:border-b-0'>
-            Scroll down for more movie details
-          </p>
-          {user && (
-          <div className='flex items-center space-x-4'>
+        alt='logo'
+      />
+      <div className='flex items-center space-x-2'>
+        {showGptSearch && <select className='text-white bg-gray-800 p-2 rounded-lg' onChange={ handleLanguageChange}>
+          {SUPPORTED_LANGUAGES.map((language) => (
+            <option key={language.identifier} value={language.identifier}>{language.name}</option>
+          ))}
+        </select>}
+        <button className='py-1 px-3 text-sm bg-purple-800 text-white rounded-lg'
+        onClick={handleGptSearchClick}
+        >
+           {!showGptSearch ? "GPT Search" : "Home"}
+          </button>
+        {user && (
+          <div className='flex items-center space-x-2'>
             <img
-            className='w-8 h-8 md:w-10 md:h-10 rounded-full'
-            alt='usericon'
-            src= {user?.photoURL}
+              className='w-6 h-6 md:w-8 md:h-8 rounded-full'
+              alt='usericon'
+              src={user?.photoURL}
             />
             <button 
               onClick={handleSignOut} 
-              className='px-4 py-2 text-sm md:text-base font-bold text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300 shadow-md'
+              className='px-3 py-1 text-xs md:text-sm font-bold text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300 shadow-md'
             >
               Sign Out
             </button>
           </div>
-          )}
-        </div>
+        )}
+      </div>
     </div>
   )
 }

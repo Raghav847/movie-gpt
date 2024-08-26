@@ -12,4 +12,15 @@ export const API_OPTIONS = {
     }
   };
 
+export const BG_URL = "https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg"
+
+export const BG_URL_Blur = "https://images.squarespace-cdn.com/content/v1/5f4c51aa57fa907e048ff208/1604535961375-DVOHBOS6QRROJGQJ26T9/netflix-background-9.jpg"
+
 export const IMG_CDN_URL = "https://image.tmdb.org/t/p/w500";
+
+export const SUPPORTED_LANGUAGES = [
+    {identifier: "en", name: "English"},
+    {identifier: "hindi", name: "Hindi"},
+    {identifier: "spanish", name: "Spanish"},
+    {identifier: "japanese", name: "Japanese"},
+]

@@ -26,3 +26,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 -> Add main video to the redux store
 -> Embed the yt video and make it autoplay
 -> Build the movie info card.
+-> GPT search header
+-> GPT search results
+-> GPT search bar
+-> Multi Language Support
