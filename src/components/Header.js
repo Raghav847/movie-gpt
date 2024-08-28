@@ -59,33 +59,41 @@ const Header = () => {
     dispatch(changeLanguage(e.target.value));
   }
   return (
-    <div className='absolute w-full px-4 py-2 bg-black z-10 flex flex-col md:flex-row justify-between items-center -top-2'>
+    <div className='fixed w-full px-4 py-2 bg-black z-10 flex flex-col sm:flex-row justify-between items-center'>
       <img
-        className='w-20 md:w-24 mx-auto md:mx-0'
+        className='w-24 mx-auto sm:mx-0 mb-2 sm:mb-0'
         src={LOGO}
         alt='logo'
       />
-      <div className='flex items-center space-x-2'>
-        {showGptSearch && <select className='text-white bg-gray-800 p-2 rounded-lg' onChange={ handleLanguageChange}>
-          {SUPPORTED_LANGUAGES.map((language) => (
-            <option key={language.identifier} value={language.identifier}>{language.name}</option>
-          ))}
-        </select>}
-        <button className='py-1 px-3 text-sm bg-purple-800 text-white rounded-lg'
-        onClick={handleGptSearchClick}
+      <div className='flex flex-col sm:flex-row items-center space-y-2 sm:space-y-0 sm:space-x-2'>
+        {showGptSearch && (
+          <select 
+            className='text-white bg-gray-800 p-2 rounded-lg text-sm'
+            onChange={handleLanguageChange}
+          >
+            {SUPPORTED_LANGUAGES.map((language) => (
+              <option key={language.identifier} value={language.identifier}>
+                {language.name}
+              </option>
+            ))}
+          </select>
+        )}
+        <button 
+          className='py-1 px-3 text-sm bg-purple-800 text-white rounded-lg w-full sm:w-auto'
+          onClick={handleGptSearchClick}
         >
-           {!showGptSearch ? "GPT Search" : "Home"}
-          </button>
+          {!showGptSearch ? "GPT Search" : "Home"}
+        </button>
         {user && (
-          <div className='flex items-center space-x-2'>
+          <div className='flex items-center space-x-2 mt-2 sm:mt-0'>
             <img
-              className='w-6 h-6 md:w-8 md:h-8 rounded-full'
+              className='w-8 h-8 rounded-full'
               alt='usericon'
               src={user?.photoURL}
             />
             <button 
               onClick={handleSignOut} 
-              className='px-3 py-1 text-xs md:text-sm font-bold text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300 shadow-md'
+              className='px-3 py-1 text-xs sm:text-sm font-bold text-white bg-red-600 rounded-md hover:bg-red-700 transition-colors duration-300 shadow-md'
             >
               Sign Out
             </button>

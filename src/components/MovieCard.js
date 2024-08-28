@@ -3,6 +3,7 @@ import { IMG_CDN_URL } from '../utils/constants'
 import { motion } from 'framer-motion';
 
 const MovieCard = ({posterPath}) => {
+  if (!posterPath) return null;
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}

@@ -1,20 +1,30 @@
 import React from 'react'
 import GptSearchBar from './GptSearchBar'
 import GptMovieSuggest from './GptMovieSuggest'
-import { BG_URL_Blur } from '../utils/constants'
+import { BG_URL } from '../utils/constants'
+import Header from './Header'  // Make sure to import the Header component
 
 const GptSearch = () => {
   return (
-    <div>
-      <div className=' absolute -z-10 '>
-            <img
-            //src='https://user-images.githubusercontent.com/33485020/108069438-5ee79d80-7089-11eb-8264-08fdda7e0d11.jpg'
-            //src='https://images.squarespace-cdn.com/content/v1/5bfff88170e802806d993220/1581813522353-ECNGCE7YZQSOJD6LBHQF/image-asset.png?format=1000w'
-            src={BG_URL_Blur}
-            alt='background'></img>
+    <div className="min-h-screen flex flex-col">
+      <div 
+        className="fixed inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${BG_URL})`,
+        }}
+      ></div>
+      <div className="relative flex-grow overflow-auto">
+        <div className="absolute inset-0 bg-black bg-opacity-60"></div>
+        <div className="relative z-10 min-h-screen flex flex-col">
+          <Header />
+          <div className="flex-grow p-8">
+            <div className="max-w-screen-md mx-auto">
+              <GptSearchBar />
+              <GptMovieSuggest />
+            </div>
+          </div>
         </div>
-      <GptSearchBar />
-      <GptMovieSuggest />
+      </div>
     </div>
   )
 }

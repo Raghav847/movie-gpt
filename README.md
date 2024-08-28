@@ -30,3 +30,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 -> GPT search results
 -> GPT search bar
 -> Multi Language Support
+-> Integrate OpenAI API for the GPT Search
+-> Integrate Redux for the GPT Search
+-> Memoization
+-> Error Handling
